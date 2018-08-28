@@ -3,6 +3,8 @@ package com.company.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +31,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<User> getAll() {
 		return userRepo.findAll();
+	}
+
+	@Override
+	public Page<User> getPageable(Pageable pageable) {
+		return userRepo.findAll(pageable);
 	}
 	
 }

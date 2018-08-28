@@ -1,5 +1,7 @@
 package com.company;
 
+import java.util.UUID;
+
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +23,10 @@ public class Application {
 	
 	@PostConstruct
 	public void init() {
-		userRepo.save(new User(null, "pablo dias", "pablohenrique.mg@gmail.com", passwordEncoder.encode("123")));
+		for (int i = 0; i < 42; i++) {
+			userRepo.save(new User(null, UUID.randomUUID().toString(), 
+					UUID.randomUUID().toString() , passwordEncoder.encode("123")));
+		}
 	}
 
 	public static void main(String[] args) {

@@ -1,10 +1,10 @@
 package com.company.controllers;
 
-import java.util.List;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,12 +23,13 @@ public class UserController {
 	private UserService userService;
 
 	@GetMapping
-	public ResponseEntity<List<User>> getAll(){
-		return ResponseEntity.ok().body(userService.getAll());
+	public Page<User> getAll(Pageable pageable) {
+		Page<User> result = userService.getPageable(pageable);
+		return result;
 	}
 
 	@PostMapping
-	public ResponseEntity<User> save(@Valid @RequestBody User user){
+	public ResponseEntity<User> save(@Valid @RequestBody User user) {
 		return ResponseEntity.ok().body(userService.save(user));
 	}
 }
